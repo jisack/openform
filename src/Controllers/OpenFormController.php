@@ -45,13 +45,16 @@ class OpenFormController extends Controller
 //        dd($request->all());
         if (isset($request->publish)) {
             $publish = 1;
+            $published_date = date("Y-m-d H:i:s");
         } else {
             $publish = 0;
+            $published_date = null;
         }
         $res = OpenForm::create([
             'title' => $request->title,
             'description' => $request->description,
             'publish' => $publish,
+            'published_date' => $published_date
         ]);
 
         $requestArray = $request->all();
@@ -197,6 +200,7 @@ class OpenFormController extends Controller
                     'title' => $question['title'],
                     'description' => $question['description'],
                     'type' => $question['type'],
+                    'total' => count($question['answer']),
                     'answers' => $question['answer']
                 ];
             } elseif ($question['type'] == 'single') {
@@ -212,7 +216,7 @@ class OpenFormController extends Controller
                     'description' => $question['description'],
                     'type' => $question['type'],
                     'total' => count($question['answer']),
-                    'answer' => $options,
+                    'answers' => $options,
                 ];
             } elseif ($question['type'] == 'multiple') {
                 $options = [];
@@ -227,16 +231,16 @@ class OpenFormController extends Controller
                     'description' => $question['description'],
                     'type' => $question['type'],
                     'total' => count($question['answer']),
-                    'answer' => $options,
+                    'answers' => $options,
                 ];
             }
-
         }
 
 //        dd($report);
 
-        return view('openform');
+        return view('openform.report', ['report' => $report]);
 
     }
+
 
 }

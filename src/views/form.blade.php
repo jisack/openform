@@ -1,18 +1,19 @@
 @extends('openform.layouts.app')
 
 @section('content')
-    <link rel="stylesheet" href="{{asset('openform/css/style.css')}}">
     <div class="container">
-        <div class="row">
+        <div id="row" class="row <?php echo isset($form->publish) && $form->publish == 1? 'uneditable':'';?>">
             <form class="form-horizontal" method="post"
                   action="{{isset($form) ? url('form/'.$form->id) : url('form')}}">
-                <?php echo isset($form) ? "<input type='hidden' name='_method' value='put'>" : '' ?>
+                <?php
+                echo isset($form) ? "<input type='hidden' name='_method' value='put'>" : '';
+                ?>
                 <div class="col-md-10 col-md-offset-1">
-                        <div id="openform-group">
+                    <div id="openform-group">
                         <div class="panel panel-default">
                             <div class="panel-heading" style="border: 0">
-                                Your Porject's Form
-                            </div>
+                                <h3 class="panel-title">Project's Form</h3>
+                            </div><hr>
                             {{csrf_field()}}
                             <div class="panel-body">
                                 <div class="form-group">
@@ -34,11 +35,12 @@
                         @if(isset($form->question))
                             <?php $question_count = 0 ?>
                             @foreach($form->question as $question)
-                                <input type="hidden" value="{{$question->type}}" name="type[]">
-                                <input type="hidden" value="{{$question->id}}" name="question_id[]">
                                 <div class="panel panel-default" id="panel-question{{$question_count}}">
-                                    <button type="button" onclick="removePanel('{{$question_count}}')"
-                                            class="btn btn-danger btn-xs pull-right remove-button"><b>X</b></button>
+                                    <input type="hidden" value="{{$question->type}}" name="type[]">
+                                    <input type="hidden" value="{{$question->id}}" name="question_id[]">
+                                    <button type="button" onclick="removePanel('{{$question_count}}')" class="btn btn-danger btn-xs pull-right remove-button">
+                                        <i class="fa fa-times-circle" aria-hidden="true"></i>
+                                    </button><br>
                                     <div class="panel-body">
                                         <div class="form-group">
                                             <label for="inputEmail3" class="col-sm-2 control-label">Question
@@ -82,7 +84,7 @@
                                                     <br>
                                                 @endforeach
                                             </div>
-                                            <button class="btn btn-primary btn-sm pull-left col-sm-offset-2"
+                                            <button class="add-choice btn btn-primary btn-sm pull-left col-sm-offset-2"
                                                     type="button" onclick="addCheckbox('{{$question_count}}')">Add
                                                 Choice
                                             </button>
@@ -101,7 +103,7 @@
                                                     </div><br>
                                                 @endforeach
                                             </div>
-                                            <button class="btn btn-primary btn-sm pull-left col-sm-offset-2"
+                                            <button class="add-choice btn btn-primary btn-sm pull-left col-sm-offset-2"
                                                     type="button" onclick="addRadio('{{$question_count}}')">Add Choice
                                             </button>
                                         @endif
@@ -111,7 +113,7 @@
                             @endforeach
                         @endif
                     </div>
-                    <button type="button" class="btn btn-primary pull-right" data-toggle="modal"
+                    <button type="button" class="add-question btn btn-primary pull-right" data-toggle="modal"
                             data-target="#add-item">Add Question
                     </button>
                     <br><br><br>
@@ -126,10 +128,11 @@
                             </div>
                             <div class="pull-right">
                                 <a href="{{url('form')}}" class="btn btn-default">Cancel</a>
-                                <button type="submit" class="btn btn-primary">Save</button>
+                                <button type="submit" id="btn-submit" class="btn btn-primary">Save</button>
                             </div>
                         </div>
                     </div>
+                    <br><br>
                 </div>
             </form>
         </div>
@@ -158,7 +161,8 @@
     <script>
         var question = {{isset($question_count) ? $question_count : 0 }};
         $("#form-checkbox").click(function () {
-            $("#openform-group").append('<div class="panel panel-default" id="panel-question' + question + '"><button type="button" onclick="removePanel(' + question + ')" class="btn btn-danger btn-xs pull-right remove-button"><b>X</b></button>' +
+            $("#openform-group").append('<div class="panel panel-default" id="panel-question' + question + '"><button type="button" onclick="removePanel(' + question + ')" class="btn btn-danger btn-xs pull-right remove-button">' +
+                    '<i class="fa fa-times-circle" aria-hidden="true"></i></button><br>' +
                     '<div class="panel-body">' +
                     '<input type="hidden" name="type[' + question + ']" value="multiple"><div class="form-group">' +
                     '<label for="inputEmail3" class="col-sm-2 control-label">Question Title</label>' +
@@ -181,7 +185,7 @@
                     '</label>' +
                     '</div><br>' +
                     '</div>' +
-                    '<button class="btn btn-primary btn-sm pull-left col-sm-offset-2" type="button" onclick="addCheckbox(' + question + ')">Add Choice</button>' +
+                    '<button class="add-choice btn btn-primary btn-sm pull-left col-sm-offset-2" type="button" onclick="addCheckbox(' + question + ')">Add Choice</button>' +
                     '</div>' +
                     '</div>' +
                     '</div></div>');
@@ -190,7 +194,8 @@
         });
 
         $("#form-radio").click(function () {
-            $("#openform-group").append('<div class="panel panel-default" id="panel-question' + question + '"><button type="button" onclick="removePanel(' + question + ')" class="btn btn-danger btn-xs pull-right remove-button"><b>X</b></button>' +
+            $("#openform-group").append('<div class="panel panel-default" id="panel-question' + question + '"><button type="button" onclick="removePanel(' + question + ')" class="btn btn-danger btn-xs pull-right remove-button">' +
+                    '<i class="fa fa-times-circle" aria-hidden="true"></i></button><br>' +
                     '<div class="panel-body">' +
                     '<input type="hidden" name="type[' + question + ']" value="single"><div class="form-group">' +
                     '<label for="inputEmail3" class="col-sm-2 control-label">Question Title</label>' +
@@ -213,7 +218,7 @@
                     '</label>' +
                     '</div><br>' +
                     '</div>' +
-                    '<button class="btn btn-primary btn-sm pull-left col-sm-offset-2" type="button" onclick="addRadio(' + question + ')">Add Choice</button>' +
+                    '<button class="add-choice btn btn-primary btn-sm pull-left col-sm-offset-2" type="button" onclick="addRadio(' + question + ')">Add Choice</button>' +
                     '</div>' +
                     '</div>' +
                     '</div>');
@@ -222,7 +227,8 @@
         });
 
         $("#form-text").click(function () {
-            $("#openform-group").append('<div class="panel panel-default" id="panel-question' + question + '"><button type="button" onclick="removePanel(' + question + ')" class="btn btn-danger btn-xs pull-right remove-button"><b>X</b></button>' +
+            $("#openform-group").append('<div class="panel panel-default" id="panel-question' + question + '"><button type="button" onclick="removePanel(' + question + ')" class="btn btn-danger btn-xs pull-right remove-button">' +
+                    '<i class="fa fa-times-circle" aria-hidden="true"></i></button><br>' +
                     '<div class="panel-body">' +
                     '<input type="hidden" name="type[' + question + ']" value="text"><div class="form-group">' +
                     '<label for="inputEmail3" class="col-sm-2 control-label">Question Title</label>' +
@@ -279,15 +285,17 @@
                 });
             }
             @else
-            $('form').append('<input type="hidden" value="1" name="publish">').submit();
+            validate(function() {
+                $('form').append('<input type="hidden" value="1" name="publish">').submit();
+            });
             @endif
         });
 
-        $('form').on('submit', function () {
+        function validate(callback){
             var json = {};
             var textbox = $(':text');
             if($('#openform-group').children().length <= 1){
-                alert('At least one question');
+                alert('Needs at least one question');
                 return false;
             }
             for (var i = 0; i < textbox.length; i++) {
@@ -303,8 +311,13 @@
                     return false;
                 }
             }
+            callback();
+        }
 
-        })
+        $('form').on('submit', function () {
+            return validate();
+        });
     </script>
 
+    <link rel="stylesheet" href="{{asset('css/style.css')}}">
 @endsection

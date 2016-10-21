@@ -28,6 +28,7 @@ class ApiOpenFormController extends Controller
     {
         $form = OpenForm::with('question.option')->find($id);
         $api_question = [];
+        unset($form->app_id);
         foreach ($form->question as $question) {
             unset($question['form_id']);
             unset($question['question_id']);
