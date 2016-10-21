@@ -1,0 +1,14 @@
+{
+    "name": "wisdompackage/openform",
+    "description": "form to make a api form for other device. this only for laravel project !",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "JacobIsack",
+            "email": "jokjack26172@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
