@@ -12,6 +12,13 @@ form to make a api form for other device. this only for laravel project !
   ```
   to "psr-4"
   
+  in config/app add
+  ```php
+          Wisdom\Openform\OpenformServiceProvider::class,
+  ```
+  to array provider
+  
+  
   and then run 
   ```bash
       $ composer dump-autoload
