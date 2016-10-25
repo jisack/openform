@@ -48,6 +48,6 @@
     </div>
 
     <!-- Scripts -->
-    <script src="/js/app.js"></script>
+    <script src="{{asset('openform/assets/app.js')}}"></script>
 </body>
 </html>

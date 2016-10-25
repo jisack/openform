@@ -319,5 +319,5 @@
         });
     </script>
 
-    <link rel="stylesheet" href="{{asset('css/style.css')}}">
+    <link rel="stylesheet" href="{{asset('openform/assets/style.css')}}">
 @endsection
