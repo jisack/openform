@@ -35,13 +35,11 @@ form to make a api form for other device. this only for laravel project !
   <b>www.yourdomain.com\form</b>
   
   ##Usage
-  
     Send your answer by http POST
     
     type : json
     
     example
-    
     ```json
     { "form_id" : 1 ,
         "answers" : [
