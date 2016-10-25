@@ -144,14 +144,26 @@
                                     aria-hidden="true">&times;</span></button>
                         <h4 class="modal-title">Modal title</h4>
                     </div>
-                    <div class="modal-body  text-center" style="height: 190px">
-                        <a href="#" id="form-checkbox" class="col-sm-4"><img
-                                    src="{{asset('openform-images/icon_input_checkboxes.png')}}"><br><br>Multiple Choice</a>
-                        <a href="#" class="col-sm-4" id="form-radio"><img
-                                    src="{{asset('openform-images/icon_input_multiplechoice.png')}}"><br><br>Single
-                            Choice</a>
-                        <a href="#" class="col-sm-4" id="form-text"><img
-                                    src="{{asset('openform-images/icon_input_text.png')}}"><br><br>Text</a>
+                    <div class="modal-body  text-center" style="min-height: 190px">
+                        <div class="col-sm-4">
+                            <a href="#" id="form-checkbox">
+                                <img src="{{asset('openform-images/icon_input_checkboxes.png')}}">
+                                <br><br>Multiple Choice<br><br>
+                            </a>
+                        </div>
+                        <div class="col-sm-4">
+                            <a href="#" id="form-radio">
+                                <img src="{{asset('openform-images/icon_input_multiplechoice.png')}}">
+                                <br><br>Single Choice<br><br>
+                            </a>
+
+                        </div>
+                        <div class="col-sm-4">
+                            <a href="#" id="form-text">
+                                <img src="{{asset('openform-images/icon_input_text.png')}}">
+                                <br><br>Text<br><br>
+                            </a>
+                        </div>
                     </div>
                 </div><!-- /.modal-content -->
             </div><!-- /.modal-dialog -->
