@@ -41,7 +41,7 @@ form to make a api form for other device. this only for laravel project !
   
   example
   
-    ```json
+```json
     { "form_id" : 1 ,
         "answers" : [
             {"question_id" : 1,
@@ -59,7 +59,7 @@ form to make a api form for other device. this only for laravel project !
             }
         ]	
     }
-    ```
+```
 
 
 
