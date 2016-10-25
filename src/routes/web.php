@@ -24,6 +24,6 @@ Route::group(['namespace' => 'Wisdom\Openform\Controllers'], function () {
     Route::get('form/report/{id}', 'OpenFormController@report');
 });
 
-Auth::routes();
+
 
 
