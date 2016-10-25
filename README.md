@@ -3,25 +3,25 @@ form to make a api form for other device. this only for laravel project !
 
 ##Requirements
 * [Laravel 5.3](https://laravel.com/docs/5.3)
-* [Laravel 5.2](https://laravel.com/docs/5.2) ... in progress
+* [Laravel 5.2](https://laravel.com/docs/5.2)
 
 ##Installation
   in composer.json add
   ```json
-  "Wisdom\\Openform\\" : "vendor/wisdompackage/openform/src"
+    "Wisdom\\Openform\\" : "vendor/wisdompackage/openform/src"
   ```
   to "psr-4"
   
   in config/app add
   ```php
-          Wisdom\Openform\OpenformServiceProvider::class,
+    Wisdom\Openform\OpenformServiceProvider::class,
   ```
   to array provider
   
   
   and then run 
   ```bash
-      $ composer dump-autoload
+      $ composer require wisdompackage/openform
   ```
   
   run
