@@ -33,6 +33,30 @@ form to make a api form for other device. this only for laravel project !
   so now you can run a form package thought
   
   <b>www.yourdomain.com\form</b>
+  
+  ##Usage
+    Send your answer by http POST
+    type : json
+    example
+    ```json
+    { "form_id" : 1 ,
+        "answers" : [
+            {"question_id" : 1,
+              "type" : "text",
+              "value" : "eiei"
+            },
+            {"question_id" : 2,
+              "type" : "single",
+              "value" : 2
+            },
+            {
+              "question_id" : 3,
+              "type" : "multiple",
+              "values" : [1,2,3]
+            }
+        ]	
+    }
+    ```
 
 
 
