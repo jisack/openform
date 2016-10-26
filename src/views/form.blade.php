@@ -304,24 +304,34 @@
         });
 
         function validate(callback){
-            var json = {};
+            var check = 0;
             var textbox = $(':text');
             if($('#openform-group').children().length <= 1){
-                alert('Needs at least one question');
+//                alert('Needs at least one question');
+                $("#openform-group").append('<div class="alert alert-danger" role="alert"> <strong>Oh snap!</strong> Needs at least one question !</div>');
+                $(".alert").fadeOut(3000,function () {
+                    $(this).remove();
+                });
                 return false;
             }
             for (var i = 0; i < textbox.length; i++) {
-                if (textbox.eq(i).val() == '' && textbox.eq(i).attr('disabled') == false) {
-                    alert('Empty Field');
-                    return false;
+                if (textbox.eq(i).val() == '' && textbox.eq(i).is(':disabled') == false) {
+                    textbox.eq(i).parent().parent().addClass('has-error');
+//                    alert('Empty Field');
+                    check++;
+//                    return false;
                 }
             }
             textbox = $('textarea');
             for (var i = 0; i < textbox.length; i++) {
                 if (textbox.eq(i).val() == '') {
-                    alert('Empty Field');
-                    return false;
+                    textbox.eq(i).parent().parent().addClass('has-error');
+                    check++;
+//                    return false;
                 }
+            }
+            if(check != 0){
+                return false;
             }
             callback();
         }
